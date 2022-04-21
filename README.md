@@ -27,3 +27,6 @@ a array with the best day(index) to buy and the best day(index) to sell, in this
     stock_picker(stock_prices)
     => [1, 4] # stock_prices[4] = 15 and stock_prices[1] = 3, so $15 - $3 = $12, profit $$$! 
     ```
+
+4. [Bubble Sort](https://en.wikipedia.org/wiki/Bubble_sort), a simple(if not the simplest) sorting algorithm and typically the one you get taughted how to 
+do it in Computer Science, impractical for real use, but good for learning the basics of sorting algorithms and Computer Science in general.
