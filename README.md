@@ -20,3 +20,11 @@ counter for that word, e.g.
     => {"go"=>1, "going"=>1, ...} # the phrase doesn't contain the word "go", but it's found as a sub string in "going", so the counter go up anyways.
     ```
     Try it [here](https://replit.com/@fell-z/Sub-Strings-TOP-1#main.rb)!
+
+3. Stock Picker, a method that takes an array with stock prices, one for each day continuously. The method must return
+a array with the best day(index) to buy and the best day(index) to sell, in this order. e.g.
+    ```ruby
+    stock_prices = [17, 3, 6, 9, 15, 8, 6, 1, 10]
+    stock_picker(stock_prices)
+    => [1, 4] # stock_prices[4] = 15 and stock_prices[1] = 3, so $15 - $3 = $12, profit $$$! 
+    ```
