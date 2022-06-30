@@ -32,3 +32,6 @@ a array with the best day(index) to buy and the best day(index) to sell, in this
 do it in Computer Science, impractical for real use, but good for learning the basics of sorting algorithms and Computer Science in general.
 
 5. [Tic Tac Toe](https://en.wikipedia.org/wiki/Tic-tac-toe), a simple game made using my new OOP skills.
+
+6. [Mastermind](https://en.wikipedia.org/wiki/Mastermind_(board_game)) is a code-breaking game for two players. This version
+has differences in the rules, resembling more to the Wordle game.
