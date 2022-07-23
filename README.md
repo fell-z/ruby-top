@@ -35,3 +35,7 @@ do it in Computer Science, impractical for real use, but good for learning the b
 
 6. [Mastermind](https://en.wikipedia.org/wiki/Mastermind_(board_game)) is a code-breaking game for two players. This version
 has differences in the rules, resembling more to the Wordle game.
+
+7. Event Manager, this project differs from the others because it's a adaptation of a tutorial from
+   Jump Start Lab, it mainly contains use cases with APIS like the 'Google Civic API' and the Ruby
+   builtins classes like 'Time' and 'CSV'
