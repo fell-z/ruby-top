@@ -9,7 +9,11 @@ class Hangman
 
   private
 
-  def game() end
+  def game()
+    loop do
+      break unless play?
+    end
+  end
 
   def ask() end
 
@@ -29,5 +33,18 @@ class Hangman
 
       Obs: You can save the game to later load and resume your session.
     WELCOME
+  end
+
+  def play?
+    choice = nil
+    loop do
+      print "Do you wanna play? [y/N] "
+      choice = gets.chomp
+
+      break if %(y n).include?(choice) || choice.empty?
+
+      puts "Please enter a valid input."
+    end
+    choice
   end
 end
