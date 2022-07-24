@@ -3,6 +3,8 @@ class Hangman
   def initialize
     dictionary = File.readlines("lib/dictionary.txt").map(&:chomp).select { |word| word.length.between?(5, 12) }
     @word = dictionary.sample
+    @correct_letters = Array.new(@word.length) { "_" }
+    @guesses_left = 10
 
     welcome_message
   end
