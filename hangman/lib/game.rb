@@ -9,13 +9,25 @@ class Hangman
 
   private
 
-  def game()
+  def game
     loop do
       break unless play?
     end
   end
 
-  def ask() end
+  def ask
+    answer = ""
+    loop do
+      puts "\nPlease enter your guess."
+      print ">> "
+      answer = gets.chomp
+
+      break unless answer.empty?
+
+      puts "Please do not leave your guess empty."
+    end
+    answer
+  end
 
   def render() end
 
