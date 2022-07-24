@@ -4,6 +4,7 @@ class Hangman
     dictionary = File.readlines("lib/dictionary.txt").map(&:chomp).select { |word| word.length.between?(5, 12) }
     @word = dictionary.sample
     @correct_letters = Array.new(@word.length) { "_" }
+    @wrong_guesses = []
     @guesses_left = 10
 
     welcome_message
@@ -31,7 +32,20 @@ class Hangman
     answer
   end
 
-  def render() end
+  def render
+    system("clear")
+
+    letter_places = @correct_letters.join
+    wrong_guesses = @wrong_guesses.join(" - ")
+
+    puts <<~GAME_STATE
+      Letters guessed wrong:
+        #{wrong_guesses}
+      Guesses left: #{@guesses_left}
+
+      #{letter_places}
+    GAME_STATE
+  end
 
   def find_saves() end
 
@@ -50,15 +64,15 @@ class Hangman
   end
 
   def play?
-    choice = nil
+    choice = "n"
     loop do
       print "Do you wanna play? [y/N] "
-      choice = gets.chomp
+      choice = gets.chomp.downcase
 
-      break if %(y n).include?(choice) || choice.empty?
+      break if %w[y n].include?(choice)
 
       puts "Please enter a valid input."
     end
-    choice
+    choice == "y"
   end
 end
