@@ -51,6 +51,16 @@ class Hangman
   end
   # rubocop:enable Metrics/MethodLength
 
+  def check_guess(guess, correct_letters)
+    return correct_letters unless @word.include?(guess)
+
+    correct_letters.map.with_index do |letter_place, index|
+      next guess if @word[index] == guess
+
+      letter_place
+    end
+  end
+
   def render
     system("clear")
 
