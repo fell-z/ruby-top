@@ -23,6 +23,7 @@ class Hangman
 
       if @guesses_left.zero?
         puts "You lost, your 10 attempts are over. Better luck next time!"
+        puts "The word was '#{@word}'."
         break
       end
 
