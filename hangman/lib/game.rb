@@ -75,17 +75,14 @@ class Hangman
       print ">> "
       answer = gets.chomp.downcase
 
-      if answer.empty? || answer.length == 1
-        puts "Please enter a word."
-        next
-      elsif answer.length != @word.length
-        puts "Please enter a word with the right length."
+      if answer.empty? || answer.length != @word.length
+        puts "Please enter a valid word with the right length."
         next
       end
 
       print "That's your final answer? [y/N] "
 
-      next unless choice == "y"
+      next unless gets.chomp.downcase == "y"
 
       break answer
     end
