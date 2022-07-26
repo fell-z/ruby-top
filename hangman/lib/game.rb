@@ -9,14 +9,50 @@ class Hangman
     @guesses_left = 10
 
     welcome_message
+    game
   end
 
   private
 
+  # rubocop:disable Metrics/MethodLength
   def game
+    return unless play?
+
     loop do
-      break unless play?
+      render
+
+      if @guesses_left.zero?
+        puts "You lost, your 10 attempts are over. Better luck next time!"
+        break
+      end
+
+      action_choice = choose_action
+
+      case action_choice
+      when "1"
+        @correct_letters = check_guess(ask_letter)
+      when "2"
+        @correct_letters = check_guess(ask_word)
+      else
+        puts "Please select a valid action"
+      end
+
+      next unless @correct_letters.join == @word
+
+      puts "Congratulations! you've guessed the word!"
+      break
     end
+  end
+  # rubocop:enable Metrics/MethodLength
+
+  def choose_action
+    puts <<~CHOICES
+      Select your action:
+        (1) Guess the letter.
+        (2) Guess the word.
+    CHOICES
+    print ">> "
+    gets.chomp
   end
 
   def ask_letter
@@ -52,16 +88,17 @@ class Hangman
   end
   # rubocop:enable Metrics/MethodLength
 
-  def check_guess(guess, correct_letters)
+  def check_guess(guess)
     unless @word.include?(guess)
       @wrong_letter_guesses << guess if guess.length == 1
 
       @wrong_word_guesses << guess if guess.length > 1
 
-      return correct_letters
+      return @correct_letters
     end
 
-    correct_letters.map.with_index do |letter_place, index|
+    @guesses_left -= 1
+    @correct_letters.map.with_index do |letter_place, index|
       next guess if @word[index] == guess
 
       letter_place
