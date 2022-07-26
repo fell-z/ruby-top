@@ -92,6 +92,8 @@ class Hangman
   # rubocop:enable Metrics/MethodLength
 
   def check_guess(guess)
+    @guesses_left -= 1
+
     unless @word.include?(guess)
       @wrong_letter_guesses << guess if guess.length == 1
 
@@ -100,7 +102,6 @@ class Hangman
       return @correct_letters
     end
 
-    @guesses_left -= 1
     @correct_letters.map.with_index do |letter_place, index|
       next guess if @word[index] == guess
 
@@ -123,6 +124,7 @@ class Hangman
       Guesses left: #{@guesses_left}
 
       #{letter_places}
+
     GAME_STATE
   end
 
