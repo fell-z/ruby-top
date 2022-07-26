@@ -22,7 +22,7 @@ class Hangman
     loop do
       puts "\nEnter your guess."
       print ">> "
-      answer = gets.chomp
+      answer = gets.chomp.downcase
 
       break answer unless answer.empty? || answer.length != 1
 
