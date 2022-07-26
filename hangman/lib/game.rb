@@ -100,6 +100,8 @@ class Hangman
       return @correct_letters
     end
 
+    return @word.split("") if guess.length > 1
+
     @correct_letters.map.with_index do |letter_place, index|
       next guess if @word[index] == guess
 
