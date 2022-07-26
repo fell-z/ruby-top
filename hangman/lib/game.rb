@@ -4,7 +4,8 @@ class Hangman
     dictionary = File.readlines("lib/dictionary.txt").map(&:chomp).select { |word| word.length.between?(5, 12) }
     @word = dictionary.sample
     @correct_letters = Array.new(@word.length) { "_" }
-    @wrong_guesses = []
+    @wrong_word_guesses = []
+    @wrong_letter_guesses = []
     @guesses_left = 10
 
     welcome_message
@@ -52,7 +53,13 @@ class Hangman
   # rubocop:enable Metrics/MethodLength
 
   def check_guess(guess, correct_letters)
-    return correct_letters unless @word.include?(guess)
+    unless @word.include?(guess)
+      @wrong_letter_guesses << guess if guess.length == 1
+
+      @wrong_word_guesses << guess if guess.length > 1
+
+      return correct_letters
+    end
 
     correct_letters.map.with_index do |letter_place, index|
       next guess if @word[index] == guess
@@ -65,11 +72,14 @@ class Hangman
     system("clear")
 
     letter_places = @correct_letters.join
-    wrong_guesses = @wrong_guesses.join(" - ")
+    wrong_letter_guesses = @wrong_letter_guesses.join(" - ")
+    wrong_word_guesses = @wrong_word_guesses.join(" - ")
 
     puts <<~GAME_STATE
       Letters guessed wrong:
-        #{wrong_guesses}
+        #{wrong_letter_guesses}
+      Words guessed wrong:
+        #{wrong_word_guesses}
       Guesses left: #{@guesses_left}
 
       #{letter_places}
