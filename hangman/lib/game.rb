@@ -83,15 +83,13 @@ class Hangman
   end
 
   def play?
-    choice = "n"
     loop do
       print "Do you wanna play? [y/N] "
       choice = gets.chomp.downcase
 
-      break if %w[y n].include?(choice)
+      break choice == "y" if %w[y n].include?(choice)
 
       puts "Please enter a valid input."
     end
-    choice == "y"
   end
 end
