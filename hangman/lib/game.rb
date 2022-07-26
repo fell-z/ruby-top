@@ -77,6 +77,9 @@ class Hangman
       if answer.empty? || answer.length == 1
         puts "Please enter a word."
         next
+      elsif answer.length != @word.length
+        puts "Please enter a word with the right length."
+        next
       end
 
       print "That's your final answer? [y/N] "
