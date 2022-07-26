@@ -30,6 +30,27 @@ class Hangman
     end
   end
 
+  # rubocop:disable Metrics/MethodLength
+  def ask_word
+    loop do
+      puts "\nEnter your guess."
+      print ">> "
+      answer = gets.chomp.downcase
+
+      if answer.empty? || answer.length == 1
+        puts "Please enter a word."
+        next
+      end
+
+      print "That's your final answer? [y/N] "
+
+      next unless choice == "y"
+
+      break answer
+    end
+  end
+  # rubocop:enable Metrics/MethodLength
+
   def render
     system("clear")
 
