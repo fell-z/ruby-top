@@ -18,18 +18,16 @@ class Hangman
     end
   end
 
-  def ask
-    answer = ""
+  def ask_letter
     loop do
-      puts "\nPlease enter your guess."
+      puts "\nEnter your guess."
       print ">> "
       answer = gets.chomp
 
-      break unless answer.empty?
+      break answer unless answer.empty? || answer.length != 1
 
-      puts "Please do not leave your guess empty."
+      puts "Please enter a one-letter guess."
     end
-    answer
   end
 
   def render
