@@ -34,8 +34,6 @@ class Hangman
         @correct_letters = check_guess(ask_letter)
       when "2"
         @correct_letters = check_guess(ask_word)
-      else
-        puts "Please select a valid action"
       end
 
       next unless @correct_letters.join == @word
@@ -117,6 +115,8 @@ class Hangman
     wrong_word_guesses = @wrong_word_guesses.join(" - ")
 
     puts <<~GAME_STATE
+      Hangman
+
       Letters guessed wrong:
         #{wrong_letter_guesses}
       Words guessed wrong:
