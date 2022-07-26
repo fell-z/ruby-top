@@ -34,7 +34,11 @@ class Hangman
         @correct_letters = check_guess(ask_letter)
       when "2"
         @correct_letters = check_guess(ask_word)
+      else
+        next
       end
+
+      @guesses_left -= 1
 
       next unless @correct_letters.join == @word
 
@@ -88,8 +92,6 @@ class Hangman
   # rubocop:enable Metrics/MethodLength
 
   def check_guess(guess)
-    @guesses_left -= 1
-
     unless @word.include?(guess)
       @wrong_letter_guesses << guess if guess.length == 1
 
