@@ -1,3 +1,7 @@
-require_relative "lib/game"
+require_relative "lib/hangman"
 
-Hangman.new
+begin
+  Hangman.new
+rescue StandardError
+  puts "The main file must be executed from the root directory!"
+end
