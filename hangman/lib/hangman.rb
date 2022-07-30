@@ -13,15 +13,19 @@ class Hangman
     @wrong_letter_guesses = []
     @guesses_left = 10
 
+    Dir.mkdir(SAVE_FOLDER) unless Dir.exist?(SAVE_FOLDER)
+
     welcome_message
     game
   end
 
   private
 
-  # rubocop:disable Metrics/MethodLength
+  # rubocop:disable Metrics
   def game
     return unless play?
+
+    load_save(select_save) if load_save?
 
     loop do
       render
@@ -54,7 +58,7 @@ class Hangman
       break
     end
   end
-  # rubocop:enable Metrics/MethodLength
+  # rubocop:enable Metrics
 
   def choose_action
     puts <<~CHOICES
@@ -140,8 +144,6 @@ class Hangman
   end
 
   def save_game
-    Dir.mkdir(SAVE_FOLDER) unless Dir.exist?(SAVE_FOLDER)
-
     content = {
       word: @word,
       correct_letters: @correct_letters,
@@ -155,7 +157,7 @@ class Hangman
   def load_save?
     return if Dir.children(SAVE_FOLDER).empty?
 
-    puts "There are saved games available."
+    puts "\nThere are saved games available."
 
     loop do
       print "Do you want to load one of them? [y/N] "
@@ -167,10 +169,11 @@ class Hangman
     end
   end
 
+  # rubocop:disable Metrics
   def select_save
     saves = Dir.children(SAVE_FOLDER)
 
-    puts "There are #{saves.length} save files."
+    puts "\nThere are #{saves.length} save files."
     saves.each_with_index do |save, index|
       puts "(#{index + 1}) #{save.sub('.json', '')}"
     end
@@ -184,6 +187,7 @@ class Hangman
       puts "Please enter a valid input."
     end
   end
+  # rubocop:enable Metrics
 
   def load_save(save)
     save_content = JSON.parse(File.read("#{SAVE_FOLDER}/#{save}"))
