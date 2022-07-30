@@ -1,5 +1,10 @@
+require "json"
+require "time"
+
 # Hangman game
 class Hangman
+  SAVE_FOLDER = "saves".freeze
+
   def initialize
     dictionary = File.readlines("lib/dictionary.txt").map(&:chomp).select { |word| word.length.between?(5, 12) }
     @word = dictionary.sample
@@ -34,6 +39,9 @@ class Hangman
         @correct_letters = check_guess(ask_letter)
       when "2"
         @correct_letters = check_guess(ask_word)
+      when "3"
+        save_game
+        break
       else
         next
       end
@@ -53,6 +61,7 @@ class Hangman
       Select your action:
         (1) Guess the letter.
         (2) Guess the word.
+        (3) Save the game.
     CHOICES
     print ">> "
     gets.chomp
@@ -130,9 +139,24 @@ class Hangman
     GAME_STATE
   end
 
-  def find_saves() end
+  def save_game
+    Dir.mkdir(SAVE_FOLDER) unless Dir.exist?(SAVE_FOLDER)
+    amount_of_saves = Dir.children(SAVE_FOLDER).length
+
+    content = {
+      word: @word,
+      correct_letters: @correct_letters,
+      wrong_letter_guesses: @wrong_letter_guesses,
+      wrong_word_guesses: @wrong_word_guesses,
+      guesses_left: @guesses_left,
+      date: Time.new.strftime("%Y-%m-%d %H:%M:%S")
+    }
+    File.write("#{SAVE_FOLDER}/save_#{amount_of_saves + 1}.json", JSON.dump(content))
+  end
 
   def load_save?() end
+
+  def find_saves() end
 
   def welcome_message
     puts <<~WELCOME
