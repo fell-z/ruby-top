@@ -179,10 +179,20 @@ class Hangman
       print "Select a game to load.\n>> "
       choice = gets.chomp.to_i
 
-      break saves[(choice.to_i - 1)] if ("1"..(saves.length.to_s)).to_a.include?(choice)
+      break saves[choice - 1] if (1..(saves.length)).include?(choice)
 
       puts "Please enter a valid input."
     end
+  end
+
+  def load_save(save)
+    save_content = JSON.parse(File.read("#{SAVE_FOLDER}/#{save}"))
+
+    @word = save_content["word"]
+    @correct_letters = save_content["correct_letters"]
+    @wrong_letter_guesses = save_content["wrong_letter_guesses"]
+    @wrong_word_guesses = save_content["wrong_word_guesses"]
+    @guesses_left = save_content["guesses_left"]
   end
 
   def welcome_message
