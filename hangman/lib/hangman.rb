@@ -141,7 +141,6 @@ class Hangman
 
   def save_game
     Dir.mkdir(SAVE_FOLDER) unless Dir.exist?(SAVE_FOLDER)
-    amount_of_saves = Dir.children(SAVE_FOLDER).length
 
     content = {
       word: @word,
@@ -151,10 +150,23 @@ class Hangman
       guesses_left: @guesses_left,
       date: Time.new.strftime("%Y-%m-%d %H:%M:%S")
     }
-    File.write("#{SAVE_FOLDER}/save_#{amount_of_saves + 1}.json", JSON.dump(content))
+    File.write("#{SAVE_FOLDER}/#{content[:date]}.json", JSON.dump(content))
   end
 
-  def load_save?() end
+  def load_save?
+    return if Dir.children(SAVE_FOLDER).empty?
+
+    puts "There are saved games available."
+
+    loop do
+      print "Do you want to load one of them? [y/N] "
+      choice = gets.chomp.downcase
+
+      break choice == "y" if %w[y n].include?(choice)
+
+      puts "Please enter a valid input."
+    end
+  end
 
   def find_saves() end
 
