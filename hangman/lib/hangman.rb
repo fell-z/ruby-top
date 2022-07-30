@@ -147,10 +147,9 @@ class Hangman
       correct_letters: @correct_letters,
       wrong_letter_guesses: @wrong_letter_guesses,
       wrong_word_guesses: @wrong_word_guesses,
-      guesses_left: @guesses_left,
-      date: Time.new.strftime("%Y-%m-%d %H:%M:%S")
+      guesses_left: @guesses_left
     }
-    File.write("#{SAVE_FOLDER}/#{content[:date]}.json", JSON.dump(content))
+    File.write("#{SAVE_FOLDER}/#{Time.new.strftime('%Y-%m-%d %H:%M:%S')}.json", JSON.dump(content))
   end
 
   def load_save?
@@ -168,7 +167,23 @@ class Hangman
     end
   end
 
-  def find_saves() end
+  def select_save
+    saves = Dir.children(SAVE_FOLDER)
+
+    puts "There are #{saves.length} save files."
+    saves.each_with_index do |save, index|
+      puts "(#{index + 1}) #{save.sub('.json', '')}"
+    end
+
+    loop do
+      print "Select a game to load.\n>> "
+      choice = gets.chomp.to_i
+
+      break saves[(choice.to_i - 1)] if ("1"..(saves.length.to_s)).to_a.include?(choice)
+
+      puts "Please enter a valid input."
+    end
+  end
 
   def welcome_message
     puts <<~WELCOME
