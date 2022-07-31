@@ -144,13 +144,12 @@ class Hangman
   end
 
   def save_game
-    content = {
-      word: @word,
-      correct_letters: @correct_letters,
-      wrong_letter_guesses: @wrong_letter_guesses,
-      wrong_word_guesses: @wrong_word_guesses,
-      guesses_left: @guesses_left
-    }
+    content = instance_variables.each_with_object({}) do |var, hash|
+      string_var = var.to_s.delete("@")
+
+      hash[string_var] = instance_variable_get(var)
+    end
+
     File.write("#{SAVE_FOLDER}/#{Time.new.strftime('%Y-%m-%d %H:%M:%S')}.json", JSON.dump(content))
   end
 
@@ -192,11 +191,9 @@ class Hangman
   def load_save(save)
     save_content = JSON.parse(File.read("#{SAVE_FOLDER}/#{save}"))
 
-    @word = save_content["word"]
-    @correct_letters = save_content["correct_letters"]
-    @wrong_letter_guesses = save_content["wrong_letter_guesses"]
-    @wrong_word_guesses = save_content["wrong_word_guesses"]
-    @guesses_left = save_content["guesses_left"]
+    save_content.each do |key, value|
+      instance_variable_set("@#{key}", value)
+    end
   end
 
   def welcome_message
