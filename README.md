@@ -38,4 +38,7 @@ has differences in the rules, resembling more to the Wordle game.
 
 7. Event Manager, this project differs from the others because it's a adaptation of a tutorial from
    Jump Start Lab, it mainly contains use cases with APIS like the 'Google Civic API' and the Ruby
-   builtins classes like 'Time' and 'CSV'
+   builtins classes like 'Time' and 'CSV'.
+
+8. [Hangman](https://en.wikipedia.org/wiki/Hangman_(game)), a simple game written in the Ruby
+   language, using my new serialization skills to implement a save and load game state feature.
