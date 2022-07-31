@@ -33,7 +33,16 @@ class Hangman
         break
       end
 
-      action_choice = choose_action
+      begin
+        puts <<~CHOICES
+          Select your action:
+            (1) Guess the letter.
+            (2) Guess the word.
+            (3) Save the game.
+        CHOICES
+        print ">> "
+        action_choice = gets.chomp
+      end
 
       case action_choice
       when "1"
@@ -57,21 +66,9 @@ class Hangman
   end
   # rubocop:enable Metrics
 
-  def choose_action
-    puts <<~CHOICES
-      Select your action:
-        (1) Guess the letter.
-        (2) Guess the word.
-        (3) Save the game.
-    CHOICES
-    print ">> "
-    gets.chomp
-  end
-
   def ask_letter
     loop do
-      puts "\nEnter your guess."
-      print ">> "
+      print "\nEnter your guess.\n>> "
       answer = gets.chomp.downcase
 
       break answer unless answer.empty? || answer.length != 1
@@ -80,11 +77,9 @@ class Hangman
     end
   end
 
-  # rubocop:disable Metrics/MethodLength
   def ask_word
     loop do
-      puts "\nEnter your guess."
-      print ">> "
+      print "\nEnter your guess.\n>> "
       answer = gets.chomp.downcase
 
       if answer.empty? || answer.length != @word.length
@@ -93,13 +88,9 @@ class Hangman
       end
 
       print "That's your final answer? [y/N] "
-
-      next unless gets.chomp.downcase == "y"
-
-      break answer
+      break answer if gets.chomp.downcase == "y"
     end
   end
-  # rubocop:enable Metrics/MethodLength
 
   def check_guess(guess)
     unless @word.include?(guess)
