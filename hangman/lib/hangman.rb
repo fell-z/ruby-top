@@ -1,9 +1,8 @@
-require "json"
-require "time"
+require_relative "saveable"
 
 # Hangman game
 class Hangman
-  SAVE_FOLDER = "saves".freeze
+  include Saveable
 
   def initialize
     dictionary = File.readlines("lib/dictionary.txt").map(&:chomp).select { |word| word.length.between?(5, 12) }
@@ -12,8 +11,6 @@ class Hangman
     @wrong_word_guesses = []
     @wrong_letter_guesses = []
     @guesses_left = 10
-
-    Dir.mkdir(SAVE_FOLDER) unless Dir.exist?(SAVE_FOLDER)
 
     welcome_message
     game
@@ -141,59 +138,6 @@ class Hangman
       #{letter_places}
 
     GAME_STATE
-  end
-
-  def save_game
-    content = instance_variables.each_with_object({}) do |var, hash|
-      string_var = var.to_s.delete("@")
-
-      hash[string_var] = instance_variable_get(var)
-    end
-
-    File.write("#{SAVE_FOLDER}/#{Time.new.strftime('%Y-%m-%d %H:%M:%S')}.json", JSON.dump(content))
-  end
-
-  def load_save?
-    return if Dir.children(SAVE_FOLDER).empty?
-
-    puts "\nThere are saved games available."
-
-    loop do
-      print "Do you want to load one of them? [y/N] "
-      choice = gets.chomp.downcase
-
-      break choice == "y" if %w[y n].include?(choice)
-
-      puts "Please enter a valid input."
-    end
-  end
-
-  # rubocop:disable Metrics
-  def select_save
-    saves = Dir.children(SAVE_FOLDER)
-
-    puts "\nThere are #{saves.length} save files."
-    saves.each_with_index do |save, index|
-      puts "(#{index + 1}) #{save.sub('.json', '')}"
-    end
-
-    loop do
-      print "Select a game to load.\n>> "
-      choice = gets.chomp.to_i
-
-      break saves[choice - 1] if (1..(saves.length)).include?(choice)
-
-      puts "Please enter a valid input."
-    end
-  end
-  # rubocop:enable Metrics
-
-  def load_save(save)
-    save_content = JSON.parse(File.read("#{SAVE_FOLDER}/#{save}"))
-
-    save_content.each do |key, value|
-      instance_variable_set("@#{key}", value)
-    end
   end
 
   def welcome_message
