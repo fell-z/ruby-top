@@ -37,6 +37,22 @@ class Tree
     node
   end
 
+  def inorder(node = @root, arr = [], &block)
+    return if node.nil?
+
+    inorder(node.left, arr, &block)
+    if block_given?
+      yield node
+    else
+      arr << node.data
+    end
+    inorder(node.right, arr, &block)
+
+    return arr unless block_given?
+
+    nil
+  end
+
   private
 
   def build_tree(arr)
