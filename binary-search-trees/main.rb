@@ -37,6 +37,45 @@ class Tree
     node
   end
 
+  def delete(value, node = @root, prior_node = nil)
+    # recursively get to the desired node to delete
+    if value < node.data
+      delete(value, node.left, node)
+    elsif value > node.data
+      delete(value, node.right, node)
+    end
+
+    # prevents the other recursive method calls from executing the rest of the procedure
+    return unless value == node.data
+
+    if node.left && node.right
+      # why break works here?
+      replacement_node = inorder(node.right) { |block_node| break block_node }
+
+      node.data = replacement_node.data
+      node.right = nil if node.right == replacement_node
+
+      prior_node_to_replacement = inorder(node.right) do |block_node|
+        break block_node if block_node.left == replacement_node
+      end
+
+      prior_node_to_replacement.left = replacement_node.right || nil
+    # executes only if the node has one child
+    elsif node.left
+      node.data = node.left.data
+      node.left = nil
+    elsif node.right
+      node.data = node.right.data
+      node.right = nil
+    # executes when there's no child
+    else
+      prior_node.left = nil if prior_node.left == node
+      prior_node.right = nil if prior_node.right == node
+    end
+  rescue StandardError
+    nil
+  end
+
   def inorder(node = @root, arr = [], &block)
     return if node.nil?
 
