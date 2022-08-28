@@ -116,9 +116,21 @@ class Tree
     end
     inorder(node.right, arr, &block)
 
-    return arr unless block_given?
+    block_given? ? nil : arr
+  end
 
-    nil
+  def preorder(node = @root, arr = [], &block)
+    return if node.nil?
+
+    if block_given?
+      yield node
+    else
+      arr << node.data
+    end
+    preorder(node.left, arr, &block)
+    preorder(node.right, arr, &block)
+
+    block_given? ? nil : arr
   end
 
   private
