@@ -25,12 +25,24 @@ class Tree
     @root = build_tree(arr)
   end
 
+  def insert(value, node = @root)
+    return Node.new(value) if node.nil?
+
+    if value < node.data
+      node.left = insert(value, node.left)
+    elsif value > node.data
+      node.right = insert(value, node.right)
+    end
+
+    node
+  end
+
   private
 
   def build_tree(arr)
     return if arr.empty?
 
-    arr = arr.sort
+    arr = arr.sort.uniq
     mid_point = arr.length / 2
     Node.new(
       arr[mid_point],
