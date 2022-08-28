@@ -133,6 +133,20 @@ class Tree
     block_given? ? nil : arr
   end
 
+  def postorder(node = @root, arr = [], &block)
+    return if node.nil?
+
+    postorder(node.left, arr, &block)
+    postorder(node.right, arr, &block)
+    if block_given?
+      yield node
+    else
+      arr << node.data
+    end
+
+    block_given? ? nil : arr
+  end
+
   private
 
   def build_tree(arr)
