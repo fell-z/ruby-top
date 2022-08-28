@@ -87,6 +87,24 @@ class Tree
     end
   end
 
+  def level_order
+    queue = [@root]
+    arr = []
+
+    until queue.empty?
+      queue << queue[0].left unless queue[0].left.nil?
+      queue << queue[0].right unless queue[0].right.nil?
+
+      if block_given?
+        yield queue.shift
+      else
+        arr << queue.shift.data
+      end
+    end
+
+    return arr unless block_given?
+  end
+
   def inorder(node = @root, arr = [], &block)
     return if node.nil?
 
