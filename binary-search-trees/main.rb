@@ -156,6 +156,22 @@ class Tree
     (left_subtree_height >= right_subtree_height) ? left_subtree_height : right_subtree_height
   end
 
+  def depth(node)
+    depth_counter = 1
+    current_node = @root
+    loop do
+      break depth_counter if current_node.data == node.data
+
+      if node.data < current_node.data
+        current_node = current_node.left
+      elsif node.data > current_node.data
+        current_node = current_node.right
+      end
+
+      depth_counter += 1
+    end
+  end
+
   private
 
   def build_tree(arr)
