@@ -147,6 +147,15 @@ class Tree
     block_given? ? nil : arr
   end
 
+  def height(node)
+    return 0 if node.nil?
+
+    left_subtree_height = 1 + height(node.left)
+    right_subtree_height = 1 + height(node.right)
+
+    (left_subtree_height >= right_subtree_height) ? left_subtree_height : right_subtree_height
+  end
+
   private
 
   def build_tree(arr)
