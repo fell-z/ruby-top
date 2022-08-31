@@ -182,6 +182,11 @@ class Tree
     nodes.all?
   end
 
+  def rebalance
+    arr = inorder
+    @root = build_tree(arr)
+  end
+
   private
 
   def build_tree(arr)
