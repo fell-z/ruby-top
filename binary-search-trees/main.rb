@@ -162,14 +162,24 @@ class Tree
     loop do
       break depth_counter if current_node.data == node.data
 
-      if node.data < current_node.data
-        current_node = current_node.left
-      elsif node.data > current_node.data
-        current_node = current_node.right
-      end
+      current_node = (node.data < current_node.data) ? current_node.left : current_node.right
 
       depth_counter += 1
     end
+  end
+
+  def balanced?
+    nodes = []
+    level_order { |node| nodes << node }
+
+    nodes.map! do |node|
+      left_subtree_height = height(node.left)
+      right_subtree_height = height(node.right)
+
+      (left_subtree_height - right_subtree_height).between?(-1, 1)
+    end
+
+    nodes.all?
   end
 
   private
