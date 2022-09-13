@@ -42,3 +42,11 @@ has differences in the rules, resembling more to the Wordle game.
 
 8. [Hangman](https://en.wikipedia.org/wiki/Hangman_(game)), a simple game written in the Ruby
    language, using my new serialization skills to implement a save and load game state feature.
+
+9. [Recursion](https://en.wikipedia.org/wiki/Recursion_(computer_science)), recursion, the idea of a function that calls itself, used mostly in implementations of '[Divide-and-conquer](https://en.wikipedia.org/wiki/Divide-and-conquer_algorithm)' algorithms. This project uses recursion to implement a fibonacci sequence and the merge-sort algorithm.
+
+10. [Linked lists](https://en.wikipedia.org/wiki/Linked_list), a linear data structure similar to an array, the difference is that: in the memory, each element is placed contiguously in an array, however, in a linked list, each element is called a node that have not only the data BUT a reference to the next element, that makes it easy to add and remove elements from the list. This project is a implementation of that.
+
+11. [Binary search tree](https://en.wikipedia.org/wiki/Binary_search_tree)
+
+12. Knight Travails, a knight in chess can move to any square on the standard 8x8 chess board from any other square on the board, this program compute and outputs the shortest path(minimum amount of moves) from a square to another.
