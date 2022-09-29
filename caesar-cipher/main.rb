@@ -21,16 +21,3 @@ def caesar_cipher(text, shift_factor)
   end
   ciphered_text.join
 end
-
-print "Please, input something to cipher. > "
-input_text = gets.chomp
-puts "\n"
-
-print "Now, the shift factor, negative numbers for left shift, otherwise positive for right shift. > "
-input_shift_factor = gets.chomp.to_i
-puts "\n"
-
-raise TypeError, "No text or invalid shift factor!" if input_text.empty? || input_shift_factor.eql?(0)
-
-result = caesar_cipher(input_text, input_shift_factor)
-puts "Result: #{result}"
