@@ -26,4 +26,18 @@ describe "caesar_cipher method" do
       expect(ciphered_text).to eq("Bc gig")
     end
   end
+
+  context "when a word have letters that will need to wrap to other letters(z -> a)" do
+    it 'returns "Caesar" ciphered with a shift factor of -5' do
+      ciphered_text = caesar_cipher("Caesar", -5)
+
+      expect(ciphered_text).to eq("Xvznvm")
+    end
+
+    it 'returns "Wishing Well" ciphered with a shift factor of 8' do
+      ciphered_text = caesar_cipher("Wishing Well", 8)
+
+      expect(ciphered_text).to eq("Eqapqvo Emtt")
+    end
+  end
 end
