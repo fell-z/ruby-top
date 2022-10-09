@@ -18,6 +18,14 @@ class Player
     end
   end
 
+  def update_score
+    @points += 1
+  end
+
+  def reset_plays
+    @plays = []
+  end
+
   private
 
   def set_name
