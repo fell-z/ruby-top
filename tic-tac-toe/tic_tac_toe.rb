@@ -40,9 +40,9 @@ class TicTacToe
     puts <<~BOARD
       -----|-----|-----
         #{@board[0]}  |  #{@board[1]}  |  #{@board[2]}
-      -----|-----|-----  #{@player_one.name}: #{@player_one.points}
+      -----|-----|-----
         #{@board[3]}  |  #{@board[4]}  |  #{@board[5]}
-      -----|-----|-----  #{@player_two.name}: #{@player_two.points}
+      -----|-----|-----
         #{@board[6]}  |  #{@board[7]}  |  #{@board[8]}
       -----|-----|-----
     BOARD

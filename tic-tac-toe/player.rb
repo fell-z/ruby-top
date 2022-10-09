@@ -1,10 +1,9 @@
 # TicTacToe player
 class Player
-  attr_reader :name, :points, :plays
+  attr_reader :name, :plays
 
   def initialize(player_number)
     @name = set_name(player_number)
-    @points = 0
     @plays = []
   end
 
@@ -20,10 +19,6 @@ class Player
 
       puts "Oops! Invalid input or square already taken.\n\n"
     end
-  end
-
-  def update_score
-    @points += 1
   end
 
   def reset_plays
