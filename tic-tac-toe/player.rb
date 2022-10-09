@@ -12,9 +12,14 @@ class Player
     loop do
       print "Your turn, #{@name}. Select a empty square.\n>> "
       play = gets.chomp.to_i
-      break play if (1..9).include?(play) && possible_squares.include?(play)
 
-      puts "\nOops! Invalid input or square already taken."
+      if (1..9).include?(play) && possible_squares.include?(play)
+        @plays << play
+        break play
+      end
+
+      puts "Oops! Invalid input or square already taken.\n\n"
+      sleep(1.5)
     end
   end
 
