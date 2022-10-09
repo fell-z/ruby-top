@@ -25,10 +25,6 @@ class TicTacToe
     sleep(1.5)
   end
 
-  def update_board(player, square_pos)
-    @board[square_pos - 1] = player.name[0].upcase
-  end
-
   def game_over?(player)
     VALID_COMBINATIONS.one? do |valid_comb|
       valid_comb.intersection(player.plays.sort) == valid_comb
@@ -46,5 +42,11 @@ class TicTacToe
         #{@board[6]}  |  #{@board[7]}  |  #{@board[8]}
       -----|-----|-----
     BOARD
+  end
+
+  private
+
+  def update_board(player, square_pos)
+    @board[square_pos - 1] = player.name[0].upcase
   end
 end
