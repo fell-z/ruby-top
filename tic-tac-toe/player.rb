@@ -18,6 +18,7 @@ class Player
       end
 
       puts "Oops! Invalid input or square already taken.\n\n"
+      sleep(1)
     end
   end
 

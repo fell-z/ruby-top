@@ -16,19 +16,36 @@ class TicTacToe
     ]
     @player_one = player_one
     @player_two = player_two
+
+    start
+  end
+
+  def start
+    [@player_one, @player_two].each do |player|
+      render
+
+      start_player_turn(player)
+      if game_over?(player)
+        congrats_message(player)
+        break
+      end
+    end until game_over?(@player_one) || game_over?(@player_two)
   end
 
   def start_player_turn(player)
     possible_squares = @board.select { |square| square.is_a?(Numeric) }
     play = player.make_a_play(possible_squares)
     update_board(player, play)
-    sleep(1.5)
   end
 
   def game_over?(player)
     VALID_COMBINATIONS.one? do |valid_comb|
       valid_comb.intersection(player.plays.sort) == valid_comb
     end
+  end
+
+  def congrats_message(player)
+    puts "Congratulations #{player.name}, you won!"
   end
 
   def render
