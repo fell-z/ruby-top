@@ -21,10 +21,6 @@ class Player
     end
   end
 
-  def reset_plays
-    @plays = []
-  end
-
   private
 
   # rubocop: disable Naming
