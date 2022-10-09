@@ -27,6 +27,12 @@ class TicTacToe
     @board[square_pos - 1] = player.name[0].upcase
   end
 
+  def game_over?(player)
+    VALID_COMBINATIONS.one? do |valid_comb|
+      valid_comb.intersection(player.plays.sort) == valid_comb
+    end
+  end
+
   def render
     system("clear")
     puts <<~BOARD
