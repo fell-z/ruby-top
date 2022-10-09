@@ -1,3 +1,5 @@
+require_relative "./player"
+
 # TicTacToe game
 class TicTacToe
   VALID_COMBINATIONS = [
@@ -6,7 +8,7 @@ class TicTacToe
     [1, 5, 9], [3, 5, 7] # diagonal
   ].freeze
 
-  def initialize(player_one, player_two)
+  def initialize(player_one = Player.new(1), player_two = Player.new(2))
     @board = [
       1, 2, 3,
       4, 5, 6,

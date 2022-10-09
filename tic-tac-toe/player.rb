@@ -2,8 +2,8 @@
 class Player
   attr_reader :name, :points, :plays
 
-  def initialize
-    @name = set_name
+  def initialize(player_number)
+    @name = set_name(player_number)
     @points = 0
     @plays = []
   end
@@ -32,13 +32,15 @@ class Player
 
   private
 
-  def set_name
+  # rubocop: disable Naming
+  def set_name(player_number)
     loop do
-      print "Insert your name starting with a letter.\n>> "
+      print "Player #{player_number}, insert your name starting with a letter.\n>> "
       name = gets.chomp
       break name if ("a".."z").include?(name[0].downcase)
 
       puts "\nOops! Name not starting with a letter."
     end
   end
+  # rubocop: enable Naming
 end
