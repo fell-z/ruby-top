@@ -21,7 +21,7 @@ class Player
   end
 
   def take_a_move
-    selected_square = "lol" # stupid local var
+    selected_square = ""
     print "\n#{@name}, make your move: "
     loop do
       selected_square = gets.chomp.to_i

@@ -14,6 +14,7 @@ class Board
   end
 
   def display
+    system("clear")
     puts <<~BOARD
       -----|-----|-----
         #{@squares[0]}  |  #{@squares[1]}  |  #{@squares[2]}
