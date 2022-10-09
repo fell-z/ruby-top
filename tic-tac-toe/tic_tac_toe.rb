@@ -16,17 +16,15 @@ class TicTacToe
     @player_two = player_two
   end
 
-  # This method was taken from the previous implementation, in order to reduce work.
-  # TODO: must change the values in the interpolation to the correct values
   def render
     system("clear")
     puts <<~BOARD
       -----|-----|-----
-        #{1}  |  #{2}  |  #{3}
-      -----|-----|-----  #{'Player 1 name'}: #{'Player 1 points'}
-        #{4}  |  #{5}  |  #{6}
-      -----|-----|-----  #{'Player 2 name'}: #{'Player 2 points'}
-        #{7}  |  #{8}  |  #{9}
+        #{@board[0]}  |  #{@board[1]}  |  #{@board[2]}
+      -----|-----|-----  #{@player_one.name}: #{@player_one.points}
+        #{@board[3]}  |  #{@board[4]}  |  #{@board[5]}
+      -----|-----|-----  #{@player_two.name}: #{@player_two.points}
+        #{@board[6]}  |  #{@board[7]}  |  #{@board[8]}
       -----|-----|-----
     BOARD
   end
