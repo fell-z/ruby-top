@@ -1,5 +1,15 @@
 # TicTacToe game
 class TicTacToe
+  def initialize(player_one, player_two)
+    @board = [
+      1, 2, 3,
+      4, 5, 6,
+      7, 8, 9
+    ]
+    @player_one = player_one
+    @player_two = player_two
+  end
+
   # This method was taken from the previous implementation, in order to reduce work.
   # TODO: must change the values in the interpolation to the correct values
   def render
