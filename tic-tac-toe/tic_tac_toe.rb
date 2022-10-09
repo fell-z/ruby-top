@@ -16,6 +16,17 @@ class TicTacToe
     @player_two = player_two
   end
 
+  def start_player_turn(player)
+    possible_squares = @board.select { |square| square.is_a?(Numeric) }
+    play = player.make_a_play(possible_squares)
+    update_board(player, play)
+    sleep(1.5)
+  end
+
+  def update_board(player, square_pos)
+    @board[square_pos - 1] = player.name[0].upcase
+  end
+
   def render
     system("clear")
     puts <<~BOARD
