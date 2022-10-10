@@ -16,8 +16,6 @@ class TicTacToe
     ]
     @player_one = player_one
     @player_two = player_two
-
-    start
   end
 
   def start

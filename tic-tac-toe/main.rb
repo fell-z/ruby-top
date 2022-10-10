@@ -1,3 +1,3 @@
-require "./tic_tac_toe"
+require_relative "./tic_tac_toe"
 
-TicTacToe.new
+TicTacToe.new.start
