@@ -43,7 +43,7 @@ class TicTacToe
   end
 
   def congrats_message(player)
-    puts "Congratulations #{player.name}, you won!"
+    puts "Congratulations Player #{(player.sym) == "X" ? 1 : 2}, you won!"
   end
 
   def render
@@ -62,6 +62,6 @@ class TicTacToe
   private
 
   def update_board(player, square_pos)
-    @board[square_pos - 1] = player.name[0].upcase
+    @board[square_pos - 1] = player.sym
   end
 end
