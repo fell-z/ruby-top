@@ -1,3 +1,7 @@
+# NOTICE
+
+I decided to create repo to each one of the projects, make it a little more organized.
+
 # Ruby Projects
 
 Here is where I store my ruby projects of [TOP](https://theodinproject.com),
